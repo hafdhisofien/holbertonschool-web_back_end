@@ -3,7 +3,8 @@
 Add two floats
 """
 
-def add(a:float, b:float)-> float:
+
+def add(a: float, b: float) -> float:
     """
     Args:
         a: float number
@@ -11,4 +12,4 @@ def add(a:float, b:float)-> float:
     Returns:
         sum as a float
     """
-    return a+b
+    return a + b
