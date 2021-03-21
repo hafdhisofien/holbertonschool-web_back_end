@@ -26,8 +26,8 @@ class LIFOCache(BaseCaching):
         if key and item:
             self.cache_data[key] = item
         if len(self.cache_data) > BaseCaching.MAX_ITEMS:
-            discard = sorted(next(reversed(self.cache_data.keys())))
-            self.cache_data.pop(discard[0])
+            discard = sorted(self.cache_data.keys())
+            next(reversed(self.cache_data.pop(discard[0])))
             print("DISCARD: {}".format(discard[0]))
 
     def get(self, key):
