@@ -30,7 +30,6 @@ class LIFOCache(BaseCaching):
             self.cache_data.pop(discard[-2])
             print("DISCARD: {}".format(discard[-2]))
 
-
     def get(self, key):
         """
         return the value in self.cache_data linked to key.
