@@ -21,7 +21,7 @@ class BasicCache(BaseCaching):
             self.cache_data[key] = item
         else:
             pass
-    
+
     def get(self, key):
         """
         return the value in self.cache_data linked to key.
