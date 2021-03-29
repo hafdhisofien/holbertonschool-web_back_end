@@ -20,6 +20,6 @@ def filter_datum(fields: List[str],
         message: a string representing the log line
     """
     for field in fields:
-        m_format = field + "=.+?(?=abc)*\\" + ";"
-        message = re.sub(m_format, field + "=" + redaction + separator, message)
+        message = re.sub(field + "=.+?(?=abc)*\\" + ";",
+                         field + "=" + redaction + separator, message)
     return message
