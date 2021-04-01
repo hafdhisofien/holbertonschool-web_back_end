@@ -18,6 +18,10 @@ class Auth:
             return True
         if path[-1] != '/':
             path += '/'
+        for path in excluded_paths:
+            if path.endswith('*'):
+                if path.startswith(i[:1]):
+                    return False
         if path in excluded_paths:
             return False
         else:
