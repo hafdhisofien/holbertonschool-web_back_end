@@ -22,6 +22,7 @@ class TestAccessNestedMap(unittest.TestCase):
         method to test that the method returns what it is supposed to.
         """
         self.assertEqual(access_nested_map(nested_map, path), answer)
+
     @parameterized.expand([
         ({}, ("a",)),
         ({"a": 1}, ("a", "b")),
@@ -34,7 +35,8 @@ class TestAccessNestedMap(unittest.TestCase):
             access_nested_map(nested_map, path)
         self.assertEqual(err.exception.args[0], path[-1])
 
-    class TestGetJson(unittest.TestCase):
+
+class TestGetJson(unittest.TestCase):
     """
     Testing Get json fn
     """
