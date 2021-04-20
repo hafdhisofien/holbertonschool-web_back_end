@@ -2,25 +2,21 @@
 """
 Test module
 """
-import client
-from client import GithubOrgClient
-from unittest import TestCase, mock
-from unittest.mock import patch, Mock
+import unittest
+from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
+from unittest.mock import patch, Mock
 
 
-class TestGithubOrgClient(TestCase):
+class TestAccessNestedMap(unittest.TestCase):
+    """[TestAccessNestedMap]
     """
-    Testing the class
-    """
-
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
         ({"a": {"b": 2}}, ("a",), {"b": 2}),
         ({"a": {"b": 2}}, ("a", "b"), 2),
     ])
     def test_access_nested_map(self, nested_map, path, answer):
-        """
-        method to test that the method returns what it is supposed to.
+        """[test_access_nested_map]
         """
         self.assertEqual(access_nested_map(nested_map, path), answer)
