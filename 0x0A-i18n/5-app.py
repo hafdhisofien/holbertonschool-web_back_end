@@ -21,7 +21,7 @@ def get_user(login_as):
     if the ID cannot be found or if login_as was not passed.
     """
     try:
-        return users.get(int(login_as))
+        return users.get(int(request.args.get('login_as')))
     except Exception:
         return None
 
@@ -31,7 +31,7 @@ def before_request():
     """
     find a user if any, and set it as a global on flask.g.user
     """
-    g.user = get_user(request.args.get('login_as'))
+    g.user = get_user()
 
 
 class Config(object):
