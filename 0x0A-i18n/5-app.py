@@ -14,6 +14,7 @@ users = {
     4: {"name": "Teletubby", "locale": None, "timezone": "Europe/London"},
 }
 
+
 def get_user(login_as):
     """
     returns a user dictionary or None
@@ -24,9 +25,10 @@ def get_user(login_as):
     except Exception:
         return None
 
+
 @app.before_request
 def before_request():
-    """ 
+    """
     find a user if any, and set it as a global on flask.g.user
     """
     g.user = get_user(request.args.get('login_as'))
