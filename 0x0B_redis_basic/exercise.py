@@ -5,6 +5,26 @@ Exercise
 import redis
 from uuid import uuid4
 from typing import Union, Callable, Optional
+from sys import byteorder
+from functools import wraps
+
+
+def count_calls(method: Callable = None) -> Callable:
+    """
+    takes a single method Callable argument and returns a Callable
+    """
+    key = method.__qualname__
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """
+        increments the count for that key every time the method is called
+        Returns the value returned by the original method
+        """
+        self._redis.incr(key)
+        return method(self, *args, **kwargs)
+
+    return wrapper
 
 
 class Cache:
@@ -18,6 +38,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """
         generate a random key
