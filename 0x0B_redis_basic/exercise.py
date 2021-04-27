@@ -60,6 +60,18 @@ def call_history(method: Callable) -> Callable:
 
         print(f'{key} was called {calls} times:')
 
+        for count_in, count_out in zip(inputs_list, outputs_list):
+            try:
+                count_in = count_in.decode('utf-8')
+            except Exception:
+                count_in = ""
+            try:
+                count_out = count_out.decode('utf-8')
+            except Exception:
+                count_out = ""
+
+        print(f'{key}(*{count_in}) -> {count_out}')
+
 
 class Cache:
     """
