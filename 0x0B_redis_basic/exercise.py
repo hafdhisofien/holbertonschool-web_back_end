@@ -4,7 +4,7 @@ Exercise
 """
 import redis
 from uuid import uuid4
-from typing import Union
+from typing import Union, Callable, Optional
 
 
 class Cache:
@@ -27,3 +27,32 @@ class Cache:
         key = str(uuid4())
         self._redis.set(key, data)
         return key
+
+    def get(self, key: str, fn: Optional[Callable] = None)\
+            -> Union[str, bytes, int, float]:
+        """
+        Args:
+            key: string argument
+            fn: optional Callable argument
+        Returns:
+            callable will convert the data back to the desired format
+            else
+            conserve the original Redis.get behavior if the key does not exist.
+        """
+        key = self._redis.get(key)
+
+        if fn:
+            key = fn(key)
+        return key
+
+    def get_str(self, data: bytes) -> str:
+        """
+        automatically parametrize Cache.get
+        """
+        return data.decode('utf-8')
+
+    def get_int(self, data: bytes) -> int:
+        """
+        automatically parametrize Cache.get
+        """
+        return int.from_bytes(data, byteorder)
