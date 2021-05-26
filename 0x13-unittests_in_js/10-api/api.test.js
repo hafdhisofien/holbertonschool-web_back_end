@@ -12,7 +12,7 @@ describe('regex test', function () {
     });
   });
   describe('ID is NAN', function() {
-    it('endpoint: GET /cart/:isNaN', (done) => {
+    it('endpoint: GET /cart/:isNaN', function(done){
       const call = { url: 'http://localhost:7865/cart/anything',method: 'GET'};
       request(call, function(error, response, body) {
         chai.expect(response.statusCode).to.equal(404);
@@ -21,7 +21,7 @@ describe('regex test', function () {
     });
   });
   describe('GET /available_payments', function() {
-    it('endpoint: GET /available_payments', (done) => {
+    it('endpoint: GET /available_payments', function(done) {
       const call = {url: 'http://localhost:7865/available_payments',method: 'GET'};
       request(call, function(error, response, body)  {
         chai.expect(response.statusCode).to.equal(200);
@@ -34,7 +34,7 @@ describe('regex test', function () {
   });
   
   describe('POST /login', function() {
-    it('POST /login', (done) => {
+    it('POST /login', function(done){
       const call = {url: 'http://localhost:7865/login',method: 'POST',
         json: {
           userName: 'Betty',
@@ -42,7 +42,7 @@ describe('regex test', function () {
       };
       request(call, function(error, response, body){
         chai.expect(response.statusCode).to.equal(200);
-        chai.expect(body).to.equal('Welcome Betty');
+        chai.expect(body).to.equal('Welcome :Betty');
         done();
       });
     });
